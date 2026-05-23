@@ -94,7 +94,7 @@ export default function App() {
 
         <div style={{ flex: 1, position: 'relative' }}>
           <MapContainer
-              center={[59.3293, 18.0686]}
+              center={[process.env.LATITUDE, process.env.LONGITUDE]}
               zoom={12}
               style={{ height: '100%', width: '100%' }}
           >

@@ -10,8 +10,8 @@ def handler(event, context):
     generated_event = {
         "stream_id": f"car_{random.randint(1, 100)}",
         "timestamp": int(time.time() * 1000),
-        "latitude": round(59.3293 + (random.random() - 0.5) * 0.1, 4),
-        "longitude": round(18.0686 + (random.random() - 0.5) * 0.1, 4),
+        "latitude": round(os.environ["LATITUDE"] + (random.random() - 0.5) * 0.1, 4),
+        "longitude": round(os.environ["LONGITUDE"] + (random.random() - 0.5) * 0.1, 4),
         "speed_kmh": random.randint(30, 90)
     }
 
