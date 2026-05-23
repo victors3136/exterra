@@ -1,0 +1,1 @@
+Compress-Archive -Path index.js -DestinationPath ../handlers/processor.zip -Force

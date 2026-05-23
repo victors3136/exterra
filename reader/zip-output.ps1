@@ -1,0 +1,1 @@
+Compress-Archive -Path bootstrap -DestinationPath ../handlers/reader.zip -Force
