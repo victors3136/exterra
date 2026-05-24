@@ -5,7 +5,7 @@ import {Theme} from "./Theme.js";
 
 export const makeCarIcon = (speed) => {
 
-    const trafficThreshold = 30; // km/hour
+    const trafficThreshold = 25; // km/hour
     const freeFlowColor = Theme["accent-pos"];
     const trafficColor = Theme["accent-neg"];
 
