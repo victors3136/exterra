@@ -13,7 +13,7 @@ export default function Header(props) {
     }}>
         <div style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
             <Radio style={{color: Theme.accent}}/>
-            <h1 style={{margin: 0, fontSize: '1.25rem', fontWeight: 'bold'}}>exterra: live traffic data</h1>
+            <h1 style={{margin: 0, fontSize: '1.25rem', fontWeight: 'bold'}}>exterra</h1>
         </div>
         <div style={{display: 'flex', alignItems: 'center', gap: '15px', fontSize: '0.875rem'}}>
             {props.lastUpdated && <span style={{color: Theme.text}}>Sync: {props.lastUpdated}</span>}
