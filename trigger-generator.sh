@@ -1,0 +1,1 @@
+aws lambda invoke --function-name radar-event-generator --region eu-north-1 output.json
