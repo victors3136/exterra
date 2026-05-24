@@ -46,18 +46,26 @@ export default function App() {
     const fetchTelemetryData = async () => {
         setLoading(true);
 
-        const parsePayload = (rawData) => rawData.map(item => ({
-            id: item.stream_id.includes("mock") ? item.stream_id : `${item.stream_id} (Live)`,
-            timestamp: new Date(Number(item.timestamp)),
-            lat: Number(item.x),
-            lng: Number(item.y),
-            speed: Number(item.speed)
-        }));
+        const parsePayload = (rawData) => rawData.map(item => {
+            const rawStreamId = item.stream_id?.Value || item.stream_id || 'unknown';
+            const rawLat      = item.latitude?.Value  || item.x || 0;
+            const rawLng      = item.longitude?.Value || item.y || 0;
+            const rawSpeed    = item.speed?.Value     || item.speed || 0;
+            const rawTime     = item.timestamp?.Value  || item.timestamp || Date.now();
+            const cleanId = rawStreamId.includes("mock") ? rawStreamId : `${rawStreamId} (Live)`;
+
+            return {
+                id: cleanId,
+                timestamp: new Date(Number(rawTime)),
+                lat: Number(rawLat),
+                lng: Number(rawLng),
+                speed: Number(rawSpeed)
+            };
+        });
 
         try {
             const response = await fetch(API_ENDPOINT);
             const data = await response.json();
-
             if (!data || data.length === 0) {
                 console.log("Database table empty. Injecting virtual fallback fleet...");
                 setVehicles(parsePayload(MOCK_FALLBACKS));
@@ -75,7 +83,7 @@ export default function App() {
     };
 
     useEffect(() => {
-        fetchTelemetryData().then(r => console.table(r)).catch(e => console.error(e));
+        fetchTelemetryData().then(_ => console.log("Telemetry data fetched successfully!"));
         const interval = setInterval(fetchTelemetryData, 5000);
         return () => clearInterval(interval);
     }, []);

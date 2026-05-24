@@ -11,7 +11,7 @@ export const makeCarIcon = (speed) => {
 
     return L.divIcon({
         html: `<div style="
-          background-color: ${speed < trafficThreshold ? freeFlowColor : trafficColor};
+          background-color: ${speed > trafficThreshold ? freeFlowColor : trafficColor};
           color: white;
           padding: 6px; 
           border-radius: 50%;

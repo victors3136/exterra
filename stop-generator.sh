@@ -1,1 +1,1 @@
-aws events disable-rule --name "radar-generator-heartbeat" --region eu-north-1
+aws events disable-rule --name "radar-generator-job" --region eu-north-1

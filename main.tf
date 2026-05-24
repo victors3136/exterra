@@ -97,6 +97,7 @@ resource "aws_lambda_function" "generator" {
   role          = aws_iam_role.lambda_exec.arn
   handler       = "index.handler"
   runtime       = "python3.12"
+  source_code_hash = filebase64sha256("handlers/generator.zip")
 
   environment {
     variables = {
@@ -111,7 +112,7 @@ resource "aws_lambda_function" "processor" {
   role          = aws_iam_role.lambda_exec.arn
   handler       = "index.handler"
   runtime       = "nodejs18.x"
-
+  source_code_hash = filebase64sha256("handlers/processor.zip")
   environment {
     variables = {
       TABLE_NAME = aws_dynamodb_table.radar_events.name
@@ -131,7 +132,7 @@ resource "aws_lambda_function" "reader" {
   role          = aws_iam_role.lambda_exec.arn
   handler       = "bootstrap"
   runtime       = "provided.al2023"
-
+  source_code_hash = filebase64sha256("handlers/reader.zip")
   environment {
     variables = {
       TABLE_NAME = aws_dynamodb_table.radar_events.name

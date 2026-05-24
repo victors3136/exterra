@@ -13,7 +13,7 @@ cluj_napoca_position = {
 
 def handler(event, context):
     generated_event = {
-        "stream_id": f"car_{random.randint(1, 100)}",
+        "stream_id": f"car_{random.randint(0, 1_000_000)}",
         "timestamp": int(time.time() * 1000),
         "latitude": round(cluj_napoca_position["latitude"] + (random.random() - 0.5) * 0.1, 4),
         "longitude": round(cluj_napoca_position["longitude"] + (random.random() - 0.5) * 0.1, 4),
