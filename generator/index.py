@@ -17,7 +17,7 @@ def handler(event, context):
         "timestamp": int(time.time() * 1000),
         "latitude": round(cluj_napoca_position["latitude"] + (random.random() - 0.5) * 0.1, 4),
         "longitude": round(cluj_napoca_position["longitude"] + (random.random() - 0.5) * 0.1, 4),
-        "speed_kmh": random.randint(1, 70)  # kmph
+        "speed_kmh": round(random.triangular(1, 70, 25))  # kmph
     }
 
     try:
