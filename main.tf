@@ -229,3 +229,27 @@ output "frontend_url" {
   value       = aws_s3_bucket_website_configuration.frontend_hosting.website_endpoint
   description = "Frontend Web App URL"
 }
+
+# ==========================================
+#             EVENT GENERATION
+# ==========================================
+
+resource "aws_cloudwatch_event_rule" "generator_job" {
+  name                = "radar-generator-job"
+  description         = "Trigger the telemetry generator"
+  schedule_expression = "rate(1 minute)"
+}
+
+resource "aws_cloudwatch_event_target" "trigger_generator" {
+  rule      = aws_cloudwatch_event_rule.generator_job.name
+  target_id = "InvokeGeneratorLambda"
+  arn       = aws_lambda_function.generator.arn
+}
+
+resource "aws_lambda_permission" "allow_eventbridge" {
+  statement_id  = "AllowExecutionFromEventBridge"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.generator.function_name
+  principal     = "events.amazonaws.com"
+  source_arn    = aws_cloudwatch_event_rule.generator_job.arn
+}
