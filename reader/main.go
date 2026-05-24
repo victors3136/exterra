@@ -24,16 +24,16 @@ func HandleRequest(ctx context.Context) (events.APIGatewayProxyResponse, error) 
 	service := dynamodb.NewFromConfig(configuration)
 	tableName := os.Getenv("TABLE_NAME")
 
-	oneHourAgo := time.Now().Add(-1 * time.Hour).UnixMilli()
+	tenMinutesAgo := time.Now().Add(-10 * time.Minute).UnixMilli()
 
 	data, err := service.Scan(ctx, &dynamodb.ScanInput{
 		TableName:        &tableName,
-		FilterExpression: aws.String("#ts >= :one_hour_ago"),
+		FilterExpression: aws.String("#ts >= :ten_minutes_ago"),
 		ExpressionAttributeNames: map[string]string{
 			"#ts": "timestamp",
 		},
 		ExpressionAttributeValues: map[string]types.AttributeValue{
-			":one_hour_ago": &types.AttributeValueMemberN{Value: strconv.FormatInt(oneHourAgo, 10)},
+			":ten_minutes_ago": &types.AttributeValueMemberN{Value: strconv.FormatInt(tenMinutesAgo, 10)},
 		},
 	})
 	if err != nil {
