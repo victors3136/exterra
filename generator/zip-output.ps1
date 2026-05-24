@@ -1,1 +1,0 @@
-Compress-Archive -Path index.py -DestinationPath ../handlers/generator.zip -Force
