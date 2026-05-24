@@ -38,7 +38,7 @@ yarn-error.log*
 eslintcache
 
 # Local environment secrets
-.env
+frontend/radar-map-ui/.env
 .env.local
 .env.development.local
 .env.test.local

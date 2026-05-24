@@ -5,14 +5,19 @@ import time
 import boto3
 
 simple_queue_service = boto3.client('sqs')
+cluj_napoca_position = {
+    "latitude": 46.77320,
+    "longitude": 23.62222
+}
+
 
 def handler(event, context):
     generated_event = {
         "stream_id": f"car_{random.randint(1, 100)}",
         "timestamp": int(time.time() * 1000),
-        "latitude": round(os.environ["LATITUDE"] + (random.random() - 0.5) * 0.1, 4),
-        "longitude": round(os.environ["LONGITUDE"] + (random.random() - 0.5) * 0.1, 4),
-        "speed_kmh": random.randint(30, 90)
+        "latitude": round(cluj_napoca_position["latitude"] + (random.random() - 0.5) * 0.1, 4),
+        "longitude": round(cluj_napoca_position["longitude"] + (random.random() - 0.5) * 0.1, 4),
+        "speed_kmh": random.randint(15, 70)  # kmph
     }
 
     try:
