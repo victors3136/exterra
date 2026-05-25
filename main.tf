@@ -98,6 +98,7 @@ resource "aws_lambda_function" "generator" {
   handler       = "index.handler"
   runtime       = "python3.12"
   source_code_hash = filebase64sha256("handlers/generator.zip")
+  timeout          = 65
 
   environment {
     variables = {
