@@ -16,7 +16,7 @@ def handler(event, context):
         "stream_id": f"car_{random.randint(0, 1_000_000)}",
         "timestamp": int(time.time() * 1000),
         "latitude": round(cluj_napoca_position["latitude"] + (random.random() - 0.3) * 0.1, 4),
-        "longitude": round(cluj_napoca_position["longitude"] + (random.random() - 0.7) * 0.1, 4),
+        "longitude": round(cluj_napoca_position["longitude"] + (random.random() - 0.7) * 0.1 - 0.01, 4),
         "speed_kmh": round(random.triangular(1, 70, 25))  # kmph
     }
 
